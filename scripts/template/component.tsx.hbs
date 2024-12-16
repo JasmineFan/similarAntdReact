@@ -1,0 +1,23 @@
+import React,{ReactNode,CSSProperties} from "react";
+import classNames from 'classnames'
+import './index.scss'
+
+export interface {{dirName}}Props extends React.HTMLAttributes<HTMLInputElement>{
+    className?:string;
+    type?:'normal'|'primary'|'dashed'|'text';
+    children?:ReactNode
+    size?:'small'|'medium'|'large'
+    style?: CSSProperties
+}
+
+const {{componentName}} = (props:{{dirName}}Props)=>{
+    const {className,type, children,size='medium',style,...others} = props
+    const cls = classNames({
+        'ant-btn':true,
+        [`ant-btn-${type}`]:type ,   //有type 就有这个class, 没有type 就没有这个class
+        [`ant-btn-${size}`]:size,
+        [className as string]:!!className  //!! 判断这个值是不是存在，给它转成布尔值
+    })
+    return <span {...others} className={cls} style={style} >{children}</span>
+}
+export default {{componentName}}
